@@ -22,13 +22,17 @@ public class CalendrierAnnuel {
         return this.calendriers[mois-1].estLibre(jours);
       
     }
-    public boolean reserver( int jours,int mois) {
-        if (this.calendriers[mois-1].estLibre(jours)) {
-            this.calendriers[mois-1].reserver(jours);
-            return true;
+   
+    public boolean reserver(int jours, int mois) {
+        try {
+            if (this.calendriers[mois-1].estLibre(jours)) {
+                this.calendriers[mois-1].reserver(jours);
+                return true;
+            }
+            throw new IllegalStateException("Le jour  à réservé n'est pas libre");
+        } catch (IllegalStateException e) {
+            return false;
         }
-        return false;
-      
     }
    
     public class Mois {
